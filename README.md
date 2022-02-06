@@ -1,2 +1,2 @@
-login id: ramki@gamil.com
+login id: ramki@gmail.com
 password: Ramki@123
