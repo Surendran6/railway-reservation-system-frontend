@@ -229,19 +229,20 @@ const BookingForm = () => {
   };
 
   const checkBerthAvail = (berthDetails) => {
-    const rac = berthDetails.find((x) => x.name === "RAC");
-    let count = 0;
+ 
+    let booked = 0;
+    let confirmedtickets =63;  
     berthDetails.forEach((data) => {
-      count = count + Number(data.available);
+      booked = booked + (Number(data.total) - Number(data.available));
     });
-    count = count - 28;// rac total + waiting total
-    if (count <= 63) {
+    
+    if (booked <= confirmedtickets) {
       berthDetails = berthDetails.filter(
         (data) => {
           return Number(data.available) !== 0 && data.name !== "RAC" && data.name !== "WaitingList";
         }
       );
-    } else if (rac.available !== 0) {
+    } else if ((booked - confirmedtickets) <= 18) {
       berthDetails = berthDetails.filter(
         (data) => {
           return Number(data.available) !== 0 && data.name !== "WaitingList";
